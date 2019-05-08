@@ -1,0 +1,155 @@
+/*查询整体div*/
+.searchContent{
+    float: left;
+    border:1px solid black; 
+    width: 1280px;
+     /* width: 98%;
+      width: 800px;*/
+    height:592px;
+}
+
+.searchBox{float: left;
+    width: 900px;
+}
+
+/*查询输入框*/
+.inputBox{
+    width: 200px;
+    font: 18px;
+    padding: 9px;
+    margin: 20px 0 20px 220px;
+    border-radius: 5px;
+    outline: none;
+}
+
+/*查询功能按钮*/
+.searchBtn{
+    width: 80px;
+    height: 36px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: #abf7e4;
+    cursor: pointer;
+}
+.searchBtn:hover{
+    background-color: #84f5d9;
+}
+
+/*.Dline{
+    align:center;
+    width: 1090px;;
+    margin: 0px 5px ;
+}*/
+
+.TagBox{
+    float: left;
+    background-color: rgb(228, 230, 230);
+    height: 38px;
+    width: 800px;;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.Tag{
+    float:left;
+    font: 28px;
+    border-radius: 5px 5px 0 0px;
+    padding:5px 10px;
+    margin: 7px 0px 0 3px;
+    cursor: pointer;
+}
+.Tag:hover{
+    background-color: white;
+}
+
+.Topo{  
+    float: left;
+    padding: 5px;
+    margin:7px 0px 7px 0;
+}
+
+.ResaultBox{
+    float: left;
+    height: 470px;
+    width: 1000px;
+    border: 1px solid black;
+}
+
+.Resources{
+    float: left;
+    border:1px solid rgb(173, 171, 171);
+    height: 410px;
+    width: 270px;
+    background-color:#00eeff;
+    padding: 8px 18px;;
+    margin: 20px 10px 20px 20px;
+    border-radius: 20px;
+    box-shadow:0 0 20px #05c5d3 ;
+}
+
+.ResaultCategory{
+    float: left;
+    border:1px solid rgb(173, 171, 171);
+    height: 410px;
+    width: 270px;
+    background-color:#00eeff;
+    padding: 8px 18px;;
+    margin:20px 10px;
+    border-radius: 20px;
+    box-shadow:0 0 20px #05c5d3 ;
+}
+.ConfigInformation{
+    float: left;
+    border:1px solid rgb(173, 171, 171);
+    height: 410px;
+    width: 300px;
+    background-color:#00eeff;
+    padding: 8px 18px;;
+    margin:20px 10px;
+    border-radius: 20px;
+    box-shadow:0 0 20px #05c5d3 ;
+}
+
+.Event{
+    float: left;
+    border:1px solid rgb(173, 171, 171);
+    height: 410px;
+    width: 300px;
+    background-color:#00eeff;
+    padding: 8px 18px;;
+    margin:20px 10px;
+    border-radius: 20px;
+    box-shadow:0 0 20px #05c5d3 ;
+}
+
+.tit{
+    font-size: 25px;
+    text-align: center;
+}
+
+.items{
+    font-size:20px;
+    padding:5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(156, 240, 252);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.CheckAll{
+    float:bottom;
+    margin: 15px;
+}
+
+.detail{
+    float: right;
+    text-indent: 35px;
+    padding: 10px;
+    width:250px;
+    border: 1px solid black;
+    height: 570px;
+    word-wrap: break-word;
+}

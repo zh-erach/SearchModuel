@@ -1,0 +1,123 @@
+<div class="searchContent">
+   <div class="detail">
+    <div class="tit">详细信息</div>
+    <div class="DetailContent">
+      <p>{{Detail}}</p>
+    </div>
+  </div>
+  <div class="searchBox">
+    <input class="inputBox" >
+    <button class="searchBtn" (click)="OnSearchBtn()">搜索</button>
+  </div>
+ <!-- <hr class="Dline">-->
+  <div class="TagBox">
+    <div class="Tag" [@selected]="isServer?'open':'close'" (click)="ClickTagServer()">服务器</div>
+    <div class="Tag" [@selected]="isIp?'open':'close'" (click)="ClickTagIP()" >IP/域名</div>
+    <div class="Tag" [@selected]="isPersion?'open':'close'" (click)="ClickTagPersion()">人员</div>
+    <div class="Tag" [@selected]="isBusinessSystem?'open':'close'" (click)="ClickTagBS()">业务系统</div>
+    <div class="Tag" [@selected]="isStorageEquipment?'open':'close'" (click)="ClickTagSE()">存储设备</div>
+    <div class="Tag" [@selected]="isEvent?'open':'close'" (click)="ClickTagEvent()">事件</div>  
+  </div>
+
+  <div class="Topo" >
+      <a routerLink="">查看拓扑图</a>
+  </div>
+
+  <div class='ResaultBox'>
+    <div class="ServerResault" *ngIf="isServer">
+      <div class="Resources">
+        <div class="tit">应用资源</div>
+        <div>
+          <input class="items" *ngFor="let item of items" title="{{title}}" [(ngModel)]="item" (click)="ClickItem(item)" >
+        </div>
+        <div class="CheckAll">
+          <a routerLink="">查看全部</a>
+        </div>
+      </div>
+
+      <div class="ResaultCategory">
+        <div class="tit">配置信息</div>
+        <div>
+          <input class="items" *ngFor="let item of items" title="{{title}}" [(ngModel)]="item" (click)="ClickItem(item)" >
+        </div>
+      
+      </div>
+
+      <div class="ResaultCategory">
+        <div class="tit">事件信息</div>
+        <!--<div class="items" *ngFor="let item of items" title="{{item}}" (click)="CheckDetail()">
+            {{item}}
+        </div>
+       <input class="items" title="{{items[0]}}" type="text" readonly [(ngModel)]="items[0]">-->
+          <input class="items" *ngFor="let item of items" title="{{title}}" [(ngModel)]="item" (click)="ClickItem(item)"> 
+        <div class="CheckAll">
+          <a routerLink="">查看全部</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="IPResault" *ngIf="isIp"> 
+      <div class="Resources">
+
+      </div>
+      <div class="ResaultCategory">
+    
+      </div>
+      <div class="ResaultCategory">
+        <div class="tit">事件信息</div>
+   <!--    <input class="items" title="{{items[0]}}" type="text" readonly [(ngModel)]="items[0]">
+        <input class="items" title="{{items[1]}}" type="text" readonly [(ngModel)]="items[1]">
+        <input class="items" title="{{items[2]}}" type="text" readonly [(ngModel)]="items[2]">
+        <input class="items" title="{{items[3]}}" type="text" readonly [(ngModel)]="items[3]">
+        <input class="items" title="{{items[4]}}" type="text" readonly [(ngModel)]="items[4]">
+        <input class="items" title="{{items[5]}}" type="text" readonly [(ngModel)]="items[5]">
+        <input class="items" title="{{items[6]}}" type="text" readonly [(ngModel)]="items[6]">
+        <input class="items" title="{{items[7]}}" type="text" readonly [(ngModel)]="items[7]">--> 
+        <div class="CheckAll">
+          <a routerLink="">查看全部</a>
+        </div>
+      </div>
+    </div>
+ 
+
+    <div class="PersionResault" *ngIf="isPersion"> 
+      <div class="Resources">
+
+      </div>
+    </div>
+
+    <div class="BSResault" *ngIf="isBusinessSystem"> 
+      <div>
+        <div class="Resources">
+
+          </div>
+          <div class="ResaultCategory">
+      
+          </div>
+          <div class="ResaultCategory">
+      
+          </div>
+      </div>
+    </div>
+
+    <div class="SEResault" *ngIf="isStorageEquipment"> 
+      <div class="Resources">
+
+        </div>
+        <div class="ResaultCategory">
+    
+        </div>
+        <div class="ResaultCategory">
+    
+        </div>
+    </div>
+
+    <div class="EventResault" *ngIf="isEvent"> 
+
+    </div>
+
+  </div>
+
+
+</div>
+
