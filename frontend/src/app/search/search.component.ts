@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, } from '@angular/animations';
+import { SearchService } from './service/search.service'
 
 @Component({
   selector: 'app-search',
