@@ -1,0 +1,13 @@
+<div class="search">
+  <input type="text" id="input" #box class="search" [ngClass]="{'search2':!isFocusInput,'search3':isFocusInput}"
+    (focus)="focusInput(box.value)" (blur)="blurInput(box.value)" (keyup)="onKey(box.value)" placeholder="搜索">
+  <!--  ondragstart="return false;" :禁止图片拖动复制-->
+  <div class="img" (click)="toSearch()"><img src="assets/sou.png" class="img" ondragstart="return false;"></div>
+  <div class="drop-down" *ngIf='isFocusInput'>
+    <ul class="ul">
+      <li *ngFor="let s of records" class="li" [ngClass]="{'bli':s.isEnter}" (mouseenter)="s.isEnter=true"
+        (mousedown)="s.isEnter=false" (mousedown)="liMousedown(s)" (mouseleave)="s.isEnter=false">{{s.data}}
+      </li>
+    </ul>
+  </div>
+</div>
