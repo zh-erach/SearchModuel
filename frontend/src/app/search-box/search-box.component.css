@@ -1,6 +1,6 @@
 div.search{
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     width:570px;
 }
 
@@ -9,7 +9,9 @@ div.drop-down{
     border: 1px solid #ccc;
     /* border-top-width: 0px; */
     border-radius: 0px 0px 18px 18px;
-
+    position: absolute;
+    z-index:2;
+    background-color: white;
 }
 
 img.img{
@@ -29,15 +31,16 @@ input.search3{
     border: 1px solid #ccc;
     border-radius:18px 18px 0px 0px;
     border-bottom-width: 0px;
+    height: 41px;
 }
 input.search2{
     border: 1px solid #ccc;
     border-radius: 18px;
     border-bottom-width: 1px;
+    height: 40px;
 }
 input.search {
     width: 500px;
-    height: 40px;
     outline: none;
     
     padding-left: 20px;

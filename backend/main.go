@@ -39,5 +39,6 @@ func checkError(err error) {
 
 func search(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
+	return
 
 }
