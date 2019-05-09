@@ -12,7 +12,9 @@
   <!-- <hr class="Dline">-->
 
   <!-- 这是搜索框组件 -->
-  <app-search-box (getValue)="getBoxValue($event)"></app-search-box>
+  <div class="searchBox">
+    <app-search-box (getValue)="getBoxValue($event)"></app-search-box>
+  </div>
 
   <div class="TagBox">
     <div class="Tag" [@selected]="isServer?'open':'close'" (click)="ClickTagServer()">服务器</div>

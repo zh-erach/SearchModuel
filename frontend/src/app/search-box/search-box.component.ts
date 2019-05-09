@@ -14,15 +14,13 @@ export class SearchBoxComponent implements OnInit {
   isFocusInput: boolean = false;
   records: record[] = [
     { isEnter: false, data: '454897156' },
-    { isEnter: false, data: '454897156' },
-    { isEnter: false, data: '454897156' },
-    { isEnter: false, data: '454897156' },
-
   ];
 
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
+    localStorage.setItem('searchRecords', JSON.stringify(this.records));
+    this.getRecords();
   }
 
   focusInput(value: string) {
@@ -35,7 +33,6 @@ export class SearchBoxComponent implements OnInit {
 
   blurInput() {
     this.isFocusInput = false;
-
   }
 
   liMousedown(s: record) {
@@ -45,7 +42,7 @@ export class SearchBoxComponent implements OnInit {
     // console.log(s.data)
     this.getValue.emit(this.values);
   }
-
+  //键盘按钮事件
   onKey(value: string) {
     if (value != "" && value != null) {
       this.isFocusInput = false;
@@ -54,13 +51,26 @@ export class SearchBoxComponent implements OnInit {
     }
     this.values = value;
   }
-
+  //查询，弹出
   toSearch() {
     if (this.values != "" && this.values != null) {
       this.getValue.emit(this.values)
-      console.log(this.values);
+      this.newRecordInLocal({ isEnter: false, data: this.values })
     }
   }
 
+  newRecordInLocal(n: record) {
+    if (this.records.length > 8) {
+      this.records.pop();
+      this.records.unshift(n)
+    } else {
+      this.records.unshift(n)
+    }
+    localStorage.setItem('searchRecords', JSON.stringify(this.records));
+  }
+
+  getRecords() {
+    this.records = <record[]>JSON.parse(localStorage.getItem('searchRecords'));
+  }
 
 }
