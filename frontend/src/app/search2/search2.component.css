@@ -1,0 +1,29 @@
+
+.holdBox{
+    width: 100%-2px;
+    border:1px solid black;
+}
+
+.searchBox{
+    position: relative;
+    width: 540px;
+    padding: 10px;
+    margin: 10px;
+    height: 50px;
+    background-color: antiquewhite;
+}
+
+.chooseBox{
+    width: 120px;
+    float: left;;
+}
+
+.inputBox{
+    width: 400px;
+    float: left;
+}
+.result{
+    border: 1px solid black;
+    margin: 10px 5px ;
+    padding:5px;
+}
