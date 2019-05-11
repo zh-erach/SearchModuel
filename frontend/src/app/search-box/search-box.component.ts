@@ -12,14 +12,12 @@ export class SearchBoxComponent implements OnInit {
   values: string;//搜索框的数据
   // isHasValue: boolean = false;//搜索框中是否有数据；
   isFocusInput: boolean = false;
-  records: record[] = [
-    { isEnter: false, data: '454897156' },
-  ];
+  records: record[] = [];
 
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
-    localStorage.setItem('searchRecords', JSON.stringify(this.records));
+    // localStorage.setItem('searchRecords', JSON.stringify(this.records));
     this.getRecords();
   }
 
@@ -70,7 +68,9 @@ export class SearchBoxComponent implements OnInit {
   }
 
   getRecords() {
-    this.records = <record[]>JSON.parse(localStorage.getItem('searchRecords'));
+    if (localStorage.getItem('searchRecords') != null) {
+      this.records = <record[]>JSON.parse(localStorage.getItem('searchRecords'));
+    }
   }
 
 }

@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 //http模块
 import { HttpClientModule } from '@angular/common/http';
+import { Search2Component } from './search2/search2.component';
 
 
 
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     SearchComponent,
     SearchBoxComponent,
+    Search2Component,
   ],
   imports: [
     BrowserModule,
