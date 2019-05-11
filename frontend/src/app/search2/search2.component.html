@@ -34,7 +34,7 @@
             nzDescription="{{item.Label}}"
           >
             <ng-template #nzTitle>
-              <a routerLink="/content">{{ item.Name }}</a>
+              <a routerLink="/content" (click)="get()">{{ item.Name }}</a>
             </ng-template>
           </nz-list-item-meta>  
         </nz-list-item>

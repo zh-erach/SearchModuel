@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchData, ResultData } from '../search2/http-service/SearchData';
 import { HttpServiceService } from './http-service/http-service.service';
+import { SearchComponent } from '../search/search.component';
+import { DataTranslateService } from '../dataTranlate';
 
 
 @Component({
   selector: 'app-search2',
   templateUrl: './search2.component.html',
-  styleUrls: ['./search2.component.css']
+  styleUrls: ['./search2.component.css'],
+  providers:[{provide:parent,useExisting:SearchComponent}]
 })
 export class Search2Component implements OnInit {
 
-  constructor(private http:HttpServiceService) { }
+  constructor(private http:HttpServiceService,
+    private c:DataTranslateService) { }
 
   ngOnInit() {
   }
@@ -84,7 +88,6 @@ export class Search2Component implements OnInit {
 
   contentData:ResultData=new ResultData('','')
   get(data:ResultData){
-    this.contentData = data;
-    alert('yes')
+    this.c.data = data;
   }
 }
