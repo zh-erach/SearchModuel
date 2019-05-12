@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="result">
+  <div class="result" *ngIf="isResult">
     
     <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
      <ng-template #item let-item>
@@ -34,7 +34,7 @@
             nzDescription="{{item.Label}}"
           >
             <ng-template #nzTitle>
-              <a routerLink="/content" (click)="get()">{{ item.Name }}</a>
+              <a (click)="get(item)">{{ item.Name }}</a>
             </ng-template>
           </nz-list-item-meta>  
         </nz-list-item>
@@ -42,6 +42,10 @@
     </nz-list>
   
   </div>
+  <div *ngIf="!isResult" class="result">
+    <app-content [input]="contentData"></app-content>
+  </div>
+  
 
 </div>
 

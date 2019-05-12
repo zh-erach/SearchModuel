@@ -6,7 +6,6 @@ import { ContentComponent } from './content/content.component';
 const routes: Routes = [
   {path:'',redirectTo:'/search', pathMatch:'full'},
   {path:'search',component:Search2Component},
-  {path:'content',component:ContentComponent},
   { path: '**', component: Search2Component }
 ];
 

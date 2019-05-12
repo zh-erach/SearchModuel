@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { ResultData, SearchData, PushData } from './SearchData';
+import { ResultData, SearchData } from './SearchData';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +11,15 @@ export class HttpServiceService {
 
   
   
-  url:'';
-
-  pushData:PushData
+  searchUrl:'';
+  contentUrl:'';
 
   search(searchData:SearchData){
-    this.pushData = new PushData(searchData.ResourceClass,searchData.KeyWord,localStorage.getItem('jwt'))
-    return this.http.post<ResultData[]>(this.url,JSON.stringify(searchData));
+    return this.http.post<ResultData[]>(this.searchUrl,JSON.stringify(searchData));
+  }
+
+  searchContent(searchContent:ResultData){
+    return this.http.post<any>(this.contentUrl,JSON.stringify(searchContent))
   }
 
   data = [

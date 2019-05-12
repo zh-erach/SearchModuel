@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SearchData, ResultData } from '../search2/http-service/SearchData';
 import { HttpServiceService } from './http-service/http-service.service';
 import { SearchComponent } from '../search/search.component';
-import { DataTranslateService } from '../dataTranlate';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,7 @@ import { DataTranslateService } from '../dataTranlate';
 })
 export class Search2Component implements OnInit {
 
-  constructor(private http:HttpServiceService,
-    private c:DataTranslateService) { }
+  constructor(private http:HttpServiceService) { }
 
   ngOnInit() {
   }
@@ -35,9 +35,10 @@ export class Search2Component implements OnInit {
 
   //获取用户输入的数据
   searchData:SearchData = new SearchData('','');
-  resultData:any[] = []; 
+  resultData:ResultData[] = []; 
   search(){
     this.loading=true;
+    this.isResult = true;
     this.searchData.ResourceClass=this.selectedValue.value;
     this.http.search(this.searchData).subscribe((data:ResultData[])=>{
       this.resultData = data;
@@ -49,6 +50,7 @@ export class Search2Component implements OnInit {
   }
 
  a(){
+      this.isResult = true;
       this.data=this.http.get()
     }
 
@@ -86,8 +88,11 @@ export class Search2Component implements OnInit {
     },
   ];
 
-  contentData:ResultData=new ResultData('','')
-  get(data:ResultData){
-    this.c.data = data;
+  isResult:boolean = true;
+  contentData:ResultData = new ResultData(null,'','','');
+  get(item:ResultData){
+    //进入content界面（详细信息和相关）
+    this.contentData = item
+    this.isResult=false;
   }
 }

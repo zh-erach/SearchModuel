@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Search2Component } from '../search2/search2.component';
+import { Component, Input } from '@angular/core';
 import { ResultData } from '../search2/http-service/SearchData'
-import { DataTranslateService } from '../dataTranlate';
+import { HttpServiceService } from '../search2/http-service/http-service.service';
+
+
 
 @Component({
   selector: 'app-content',
@@ -9,12 +10,36 @@ import { DataTranslateService } from '../dataTranlate';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
-  constructor(private c:DataTranslateService){}
+  @Input() input:ResultData
+
+  constructor(
+    private  http:HttpServiceService
+  ){}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.message=this.c.data
+   //在初始化视图的时候，传回要查看选项的信息，得到详细信息和相关资源用于完成初始化视图
+    this.http.searchContent(this.input).subscribe((data:any)=>{
+
+    })
   }
-  message:ResultData =new ResultData('','')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }
