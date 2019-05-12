@@ -25,38 +25,38 @@
 
 <div id="People" *ngIf="input.ResourceClass=='人员'">
     <div class="detail">
-        <p>名称:{{input.Name}}</p>
+        <p>名称:</p>
     </div>
     <div class="related">
         <div class="RelatedResources">
-            <p>相关资源:{{input.RName}}</p>
+            <p>相关资源:</p>
         </div>
         <div class="RelatedCase">
-            <p>相关事件:{{input.Operator}}</p>
+            <p>相关事件:</p>
         </div>
     </div>
 </div>
 
-<div id="People" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
+<div id="resource" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
 
     <div class="detail">
-        <p>名称:{{input.Name}}</p>
-        <p>使用者:{{input.}}</p>
-        <p>创建者:{{}}</p>
-        <p>管理员:{{}}</p>
-        <p>附件位置:{{}}</p>
-        <p>用途:{{}}</p>
+        <p>名称:</p>
+        <p>使用者:</p>
+        <p>创建者:</p>
+        <p>管理员:</p>
+        <p>附件位置:</p>
+        <p>用途:</p>
 
     </div>
 
     <div class="related">
 
         <div class="RelatedResources">
-            <p>相关资源:{{input.RName}}</p>
+            <p>相关资源:</p>
         </div>
 
         <div class="RelatedCase">
-            <p>相关事件:{{input.Operator}}</p>
+            <p>相关事件:</p>
         </div>
 
     </div>
