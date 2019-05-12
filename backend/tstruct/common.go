@@ -19,3 +19,10 @@ type CaseResultData struct {
 	CaseDetail      string //操作详情
 	RName           string //操作资源对象
 }
+
+type UserResultData struct {
+	UserName      string
+	ResourceClass string
+	Group         []string
+	Role          []string
+}
