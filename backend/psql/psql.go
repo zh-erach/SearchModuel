@@ -48,7 +48,7 @@ func SearchGetConciseResourceData(userName string, keyWord string, searchClass s
 }
 
 func SearchGetConciseCaseData(userName string, keyWord string) (vs []tstruct.ResultData) {
-	row, err := db.Query("select id,r_name, c_operate_name from v_user_case where f_uname = '$1' ", userName)
+	row, err := db.Query("select id,r_name, c_operate_name from v_user_case where f_uname = $1", userName)
 	if err != nil {
 		panic(err)
 	}
@@ -61,6 +61,7 @@ func SearchGetConciseCaseData(userName string, keyWord string) (vs []tstruct.Res
 		v.Name = ro
 		v.ResourceClass = "事件"
 		vs = append(vs, v)
+		fmt.Println(ro)
 	}
 	return
 }

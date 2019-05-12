@@ -1,9 +1,9 @@
 package tstruct
 
-type PushData struct {
+type SearchData struct {
 	ResourceClass string
 	KeyWord       string
-	Token         string
+	// Token         string
 }
 
 type ResultData struct {
