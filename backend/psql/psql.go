@@ -50,7 +50,7 @@ func SearchGetResourceData(userName string, keyWord string, searchClass string, 
 	var err error
 	if isAdmin {
 		sq = `select r_id,r_name,r_user,r_administrator,r_category,r_location,r_configure,r_use from t_resources 
-		where r_category='服务器' and r_name like '%服%';`
+		where r_category=$1 and r_name like $2;`
 		row, err = db.Query(sq, searchClass, k)
 		if err != nil {
 			panic(err)
@@ -116,7 +116,7 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 	var row *sql.Rows
 	var err error
 	if isAdmin {
-		sq := "elect * from v_user_group where user_name like $1;"
+		sq := "select * from v_user_group where user_name like $1;"
 		row, err = db.Query(sq, k)
 		if err != nil {
 			panic(err)
@@ -133,7 +133,6 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 	}
 	vss := make(map[string]tstruct.UserResultData)
 	for row.Next() {
-
 		var v tstruct.UserResultData
 		var gn string
 		var un string

@@ -76,7 +76,7 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 		w.Write(d)
 	case "人员":
 		fmt.Println("开始搜索人员")
-		vs := psql.SearchGetUserData("10001", data["KeyWord"].(string))
+		vs := psql.SearchGetUserData("10001", data["KeyWord"].(string), isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
