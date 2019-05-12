@@ -14,7 +14,7 @@
         </div>
 
         <div class="RelatedResources">
-
+            
         </div>
 
         <div class="RelatedPeople">
@@ -25,7 +25,9 @@
 
 <div id="People" *ngIf="input.ResourceClass=='人员'">
     <div class="detail">
-        <p>名称:</p>
+        <p>名称:{{input.Name}}</p>
+        <p>所在组:{{input.Group}}</p>
+        <p>角色:{{input.Role}}</p>
     </div>
     <div class="related">
         <div class="RelatedResources">
