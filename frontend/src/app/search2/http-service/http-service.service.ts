@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { CaseResultData, SearchData, UserResultData } from './SearchData';
+import { CaseResultData, SearchData, UserResultData,ResourceResultData } from './SearchData';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class HttpServiceService {
     }
 
   }
-  
+
   searchPeople(searchData: SearchData) {
     if (searchData.ResourceClass == '人员') {
       return this.http.post<UserResultData[]>(this.contentUrl, JSON.stringify(searchData));
@@ -29,8 +29,12 @@ export class HttpServiceService {
   }
 
 
-  searchContent(searchContent: CaseResultData) {
-    return this.http.post<any>(this.contentUrl, JSON.stringify(searchContent))
+  searchContent(searchContent: SearchData) {
+    return this.http.post<CaseResultData[]>(this.contentUrl, JSON.stringify(searchContent))
+  }
+
+  searchResource(searchContent: SearchData){
+    return this.http.post<ResourceResultData[]>(this.contentUrl, JSON.stringify(searchContent))
   }
 
   data: any = [{
