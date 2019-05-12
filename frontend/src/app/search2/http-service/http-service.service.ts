@@ -26,6 +26,7 @@ export class HttpServiceService {
   data:any = [  {
     Name: '阿道夫',
     Label:['服务器',''],
+    ResourceClass:'事件'
   },
   {
     Name: '小王',
