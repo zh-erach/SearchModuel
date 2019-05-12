@@ -2,6 +2,9 @@
 .holdBox{
     width: 100%-2px;
    /* border:1px solid black;*/
+   margin:0 20px;
+   background-color: azure;
+   box-shadow: 2px 2px 20px  azure
 }
 
 .searchBox{
@@ -10,7 +13,7 @@
     padding: 10px;
     margin: 10px;
     height: 50px;
-    background-color: antiquewhite;
+    /*background-color: rgb(74, 225, 252);*/
     left: 50%;
     transform: translate(-50%);
 }
@@ -39,5 +42,6 @@
 .list{
     padding:5px;
 }.list:hover{
-    background-color: antiquewhite
+    background-color: rgb(74, 225, 252);
+    border-radius: 5px;
 }

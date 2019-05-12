@@ -13,13 +13,13 @@
             <p>事件描述:{{input.CaseDetail}}</p>
         </div>
 
-        <div class="RelatedResources">
+      <!-- <div class="RelatedResources">
 
         </div>
 
         <div class="RelatedPeople">
 
-        </div>
+        </div>--> 
     </div>
 </div>
 
@@ -29,7 +29,7 @@
         <p>所在组:{{input.Group}}</p>
         <p>角色:{{input.Role}}</p>
     </div>
-    <div class="related">
+ <!--  <div class="related">
         <div class="RelatedResources">
             <p>相关资源:</p>
         </div>
@@ -37,7 +37,7 @@
             <p>相关事件:</p>
         </div>
     </div>
-</div>
+</div>--> 
 
 <div id="resource" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
 
@@ -45,10 +45,10 @@
         <p>名称:{{input.Name}}</p>
         <p>使用者:{{input.RUser}}</p>
         <p>管理员:{{input.RAdmin}}</p>
-        <p>详细配置:{{input.Rconfigure}}</p>
+        <p>详细配置:{{input.RConfigure}}</p>
         <p>用途:{{input.RUse}}</p>
 
-    </div>
+    </div><!--
     <div class="related">
         <div class="RelatedResources">
             <p>相关资源:</p>
@@ -58,7 +58,7 @@
             <p>相关事件:</p>
         </div>
 
-    </div>
+    </div>-->
 
 </div>
 

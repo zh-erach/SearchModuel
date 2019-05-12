@@ -13,7 +13,6 @@ export class ContentComponent {
   @Input() input:CaseResultData
 
   constructor(
-    private  http:HttpServiceService
   ){}
 
   ngOnInit(): void {
