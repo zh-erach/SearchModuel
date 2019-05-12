@@ -45,35 +45,37 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	data := getBodyData(r)
 	fmt.Println(data)
+	isAdmin := psql.IsAdmin("10005")
 	fmt.Println("开始搜索")
 	switch data["ResourceClass"] {
 	case "服务器":
-		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "服务器")
+		vs := psql.SearchGetResourceData("10001", data["KeyWord"].(string), "服务器", isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
 	case "IP/域名":
-		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "IP/域名")
+		vs := psql.SearchGetResourceData("10001", data["KeyWord"].(string), "IP/域名", isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
 	case "业务系统":
-		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "业务系统")
+		vs := psql.SearchGetResourceData("10001", data["KeyWord"].(string), "业务系统", isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
 	case "存储":
-		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "存储")
+		vs := psql.SearchGetResourceData("10001", data["KeyWord"].(string), "存储", isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
 	case "事件":
 		fmt.Println("开始搜索事件")
-		vs := psql.SearchGetCaseData("10001", data["KeyWord"].(string))
+		vs := psql.SearchGetCaseData("10001", data["KeyWord"].(string), isAdmin)
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
 	case "人员":
+		fmt.Println("开始搜索人员")
 		vs := psql.SearchGetUserData("10001", data["KeyWord"].(string))
 		d, err := json.Marshal(vs)
 		checkError(err)

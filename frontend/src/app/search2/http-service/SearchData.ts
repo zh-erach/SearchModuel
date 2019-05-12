@@ -34,17 +34,17 @@ export class UserResultData {
 }
 
 //
-export class ResourceResultData{
-  
-   constructor(
-    public ID:Number,
-    public Name:string,
-    public RUser:string,//使用者
-    public RAdmin:string,//管理员
-    public ResourceClass:string, //资源类别
-    public RLocation:string,//附件位置（路径）
-    public Rconfigure:string,//资源配置（路径、大）
-    public RUse:string //资源用途（大）
-    ) {}
+export class ResourceResultData {
+
+    constructor(
+        public ID: Number,
+        public Name: string,
+        public RUser: string,//使用者
+        public RAdmin: string,//管理员
+        public ResourceClass: string, //资源类别
+        public RLocation: string,//附件位置（路径）
+        public RConfigure: string,//资源配置（路径、大）
+        public RUse: string //资源用途（大）
+    ) { }
 }
 
