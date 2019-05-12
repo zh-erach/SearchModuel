@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { CaseResultData, SearchData } from './SearchData';
+import { CaseResultData, SearchData, UserResultData } from './SearchData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,43 +14,53 @@ export class HttpServiceService {
   searchUrl: string = 'http://localhost:7080/search/page1';
   contentUrl: '';
 
-  search(searchData: SearchData) {
+  searchCase(searchData: SearchData) {
     console.log(searchData.ResourceClass)
-    return this.http.post<CaseResultData[]>(this.searchUrl, JSON.stringify(searchData));
+    if (searchData.ResourceClass == '事件') {
+      return this.http.post<CaseResultData[]>(this.searchUrl, JSON.stringify(searchData));
+    }
+
   }
+  
+  searchPeople(searchData: SearchData) {
+    if (searchData.ResourceClass == '人员') {
+      return this.http.post<UserResultData[]>(this.contentUrl, JSON.stringify(searchData));
+    }
+  }
+
 
   searchContent(searchContent: CaseResultData) {
     return this.http.post<any>(this.contentUrl, JSON.stringify(searchContent))
   }
 
-  data:any = [  {
+  data: any = [{
     Name: '阿道夫',
-    Label:['服务器',''],
-    ResourceClass:'事件'
+    Label: ['服务器', ''],
+    ResourceClass: '事件'
   },
   {
     Name: '小王',
-    Label:['人员','']
+    Label: ['人员', '']
   },
   {
     Name: '主机短路',
-    Label:['故障','感染']
+    Label: ['故障', '感染']
   },
   {
     Name: 'Ant Design Title 4',
-    Label:['a','']
+    Label: ['a', '']
   },
   {
     Name: 'Ant Design Title 5',
-    Label:['a']
+    Label: ['a']
   },
   {
     Name: 'Ant Design Title 6',
-    Label:['a']
+    Label: ['a']
   },
   {
     Name: 'Ant Design Title 7',
-    Label:['a']
+    Label: ['a']
   },];
 
   get<CaseResultData>() {
