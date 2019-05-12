@@ -37,11 +37,16 @@
     </div>
 </div>
 
-<div id="People" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按资源类型存储到数据库-->
+<div id="People" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
 
     <div class="detail">
         <p>名称:{{input.Name}}</p>
-        <p></p>
+        <p>使用者:{{input.}}</p>
+        <p>创建者:{{}}</p>
+        <p>管理员:{{}}</p>
+        <p>附件位置:{{}}</p>
+        <p>用途:{{}}</p>
+
     </div>
 
     <div class="related">
