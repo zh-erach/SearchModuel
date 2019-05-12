@@ -24,17 +24,16 @@ export class HttpServiceService {
 
   searchPeople(searchData: SearchData) {
     if (searchData.ResourceClass == '人员') {
-      return this.http.post<UserResultData[]>(this.contentUrl, JSON.stringify(searchData));
+      return this.http.post<UserResultData[]>(this.searchUrl, JSON.stringify(searchData));
     }
   }
 
-
   searchContent(searchContent: SearchData) {
-    return this.http.post<CaseResultData[]>(this.contentUrl, JSON.stringify(searchContent))
+    return this.http.post<CaseResultData[]>(this.searchUrl, JSON.stringify(searchContent))
   }
 
   searchResource(searchContent: SearchData){
-    return this.http.post<ResourceResultData[]>(this.contentUrl, JSON.stringify(searchContent))
+    return this.http.post<ResourceResultData[]>(this.searchUrl, JSON.stringify(searchContent))
   }
 
   data: any = [{
