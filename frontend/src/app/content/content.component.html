@@ -1,9 +1,9 @@
-<div id="Case">
+<div id="Case" *ngIf="input.ResourceClass=='事件'">
     <div class="detail">
         <p>名称:{{input.Name}}</p>
-        <p>事件类别:{{input.OprateName}}</p>
-        <p>发生时间:{{input.OperateTime}}</p>
-        <p>发生地点:{{input.OperatePersition}}</p>
+        <p>事件类别:{{input.OeprateName}}</p>
+        <p>发生时间:{{input.Operatetime}}</p>
+        <p>发生地点:{{input.OperatePosition}}</p>
         <p>涉及资源:{{input.RName}}</p>
         <p>操作者:{{input.Operator}}</p>
     </div>

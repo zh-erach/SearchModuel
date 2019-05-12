@@ -60,30 +60,37 @@ export class Search2Component implements OnInit {
     {
       Name: '阿道夫',
       Label:['服务器',''],
+      ResourceClass:'事件',
     },
     {
       Name: '小王',
-      Label:['人员','']
+      Label:['人员',''],
+      ResourceClass:'服务器',
     },
     {
       Name: '主机短路',
-      Label:['故障','感染']
+      Label:['故障','感染'],
+      ResourceClass:'IP/域名',
     },
     {
       Name: 'Ant Design Title 4',
-      Label:['a','']
+      Label:['a',''],
+      ResourceClass:'存储',
     },
     {
       Name: 'Ant Design Title 5',
-      Label:['a']
+      Label:['a'],
+      ResourceClass:'业务系统',
     },
     {
       Name: 'Ant Design Title 6',
-      Label:['a']
+      Label:['a'],
+      ResourceClass:'事件',
     },
     {
       Name: 'Ant Design Title 7',
-      Label:['a','k','o']
+      Label:['a','k','o'],
+      ResourceClass:'事件',
     },
   ];
 
@@ -93,5 +100,9 @@ export class Search2Component implements OnInit {
     //进入content界面（详细信息和相关）
     this.contentData = item
     this.isResult=false;
+  }
+
+  onBack(){
+    this.isResult = true;
   }
 }

@@ -29,7 +29,7 @@ import { NzInputModule } from 'ng-zorro-antd';
 import { NzButtonModule } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd';
 import { NzListModule } from 'ng-zorro-antd';
-import { NzPaginationModule } from 'ng-zorro-antd';
+import { NzPageHeaderModule } from 'ng-zorro-antd';
 import { HttpServiceService } from './search2/http-service/http-service.service';
 import { ContentComponent } from './content/content.component';
 
@@ -58,7 +58,7 @@ import { ContentComponent } from './content/content.component';
     NzButtonModule,
     NzIconModule,
     NzListModule,
-    NzPaginationModule,
+    NzPageHeaderModule,
   ],
   providers: [{provide: NZ_I18N, useValue: zh_CN},HttpServiceService],
   bootstrap: [AppComponent]
