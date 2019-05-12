@@ -70,56 +70,27 @@ export class Search2Component implements OnInit {
     }
   }
 
-  a() {
-    this.isResult = true;
-    this.data = this.http.get()
-  }
+   a() {
+     this.isResult = true;
+     this.data = this.http.get()
+   }
 
 
   //搜索的结果数据
   loading = false;  //是否进行加载动画
-  data = [
-    {
-      Name: '阿道夫',
-      //Label:['服务器',''],
-      ResourceClass: '事件',
-    },
-    {
-      Name: '小王',
-      //Label:['人员',''],
-      ResourceClass: '服务器',
-    },
-    {
-      Name: '主机短路',
-      //Label:['故障','感染'],
-      ResourceClass: 'IP/域名',
-    },
-    {
-      Name: 'Ant Design Title 4',
-      //Label:['a',''],
-      ResourceClass: '存储',
-    },
-    {
-      Name: 'Ant Design Title 5',
-      //Label:['a'],
-      ResourceClass: '业务系统',
-    },
-    {
-      Name: 'Ant Design Title 6',
-      //Label:['a'],
-      ResourceClass: '事件',
-    },
-    {
-      Name: 'Ant Design Title 7',
-      //Label:['a','k','o'],
-      ResourceClass: '事件',
-    },
-  ];
+  data = []
+    
 
   isResult: boolean = true;
-  contentData: CaseResultData = new CaseResultData(null, '1', '2', ['3'], '4', '5', '6', '7', '8', '9');
+  /*contentData: CaseResultData = new CaseResultData(null, '1', '2', ['3'], '4', '5', '6', '7', '8', '9');
   get(item: CaseResultData) {
-    //进入content界面（详细信息和相关）
+    //进入content界面
+    this.contentData = item
+    this.isResult = false;
+  }*/
+  contentData: any 
+  get(item: any) {
+    //进入content界面
     this.contentData = item
     this.isResult = false;
   }
