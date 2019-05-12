@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"./psql"
-	"./tstruct"
 )
 
 func main() {
@@ -47,18 +46,18 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 	data := getBodyData(r)
 	fmt.Println(data)
 	fmt.Println("开始搜索")
-	switch data.ResourceClass {
+	switch data["ResourceClass"] {
 	case "服务器":
-		psql.SearchGetConciseResourceData("10001", data.KeyWord, "服务器")
+		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "服务器")
 	case "IP/域名":
-		psql.SearchGetConciseResourceData("10001", data.KeyWord, "IP/域名")
+		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "IP/域名")
 	case "业务系统":
-		psql.SearchGetConciseResourceData("10001", data.KeyWord, "业务系统")
+		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "业务系统")
 	case "存储":
-		psql.SearchGetConciseResourceData("10001", data.KeyWord, "存储")
+		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "存储")
 	case "事件":
 		fmt.Println("开始搜索事件")
-		vs := psql.SearchGetConciseCaseData("10001", data.KeyWord)
+		vs := psql.SearchGetConciseCaseData("10001", data["KeyWord"].(string))
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
@@ -66,7 +65,7 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func getBodyData(r *http.Request) (data tstruct.SearchData) {
+func getBodyData(r *http.Request) (data map[string]interface{}) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	checkError(err)

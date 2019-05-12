@@ -47,13 +47,16 @@ func SearchGetConciseResourceData(userName string, keyWord string, searchClass s
 	fmt.Println(keyWord)
 }
 
-func SearchGetConciseCaseData(userName string, keyWord string) (vs []tstruct.ResultData) {
-	row, err := db.Query("select id,r_name, c_operate_name from v_user_case where f_uname = $1", userName)
+func SearchGetConciseCaseData(userName string, keyWord string) (vs []tstruct.CaseResultData) {
+	k := "%" + keyWord + "%"
+	fmt.Println(k)
+	sq := "select distinct * from (select id,r_name, c_operate_name from v_user_case where f_uname = $1) t1 where t1.c_operate_name like $2"
+	row, err := db.Query(sq, userName, k)
 	if err != nil {
 		panic(err)
 	}
 	for row.Next() {
-		var v tstruct.ResultData
+		var v tstruct.CaseResultData
 		var rn string
 		var on string
 		row.Scan(&v.ID, &rn, &on)
