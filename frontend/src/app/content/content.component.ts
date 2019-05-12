@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResultData } from '../search2/http-service/SearchData'
+import { CaseResultData } from '../search2/http-service/SearchData'
 import { HttpServiceService } from '../search2/http-service/http-service.service';
 
 
@@ -10,7 +10,7 @@ import { HttpServiceService } from '../search2/http-service/http-service.service
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
-  @Input() input:ResultData
+  @Input() input:CaseResultData
 
   constructor(
     private  http:HttpServiceService

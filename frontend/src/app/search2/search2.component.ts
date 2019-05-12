@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchData, ResultData } from '../search2/http-service/SearchData';
+import { SearchData, CaseResultData } from '../search2/http-service/SearchData';
 import { HttpServiceService } from './http-service/http-service.service';
 import { SearchComponent } from '../search/search.component';
 
@@ -34,18 +34,18 @@ export class Search2Component implements OnInit {
 
   //获取用户输入的数据
   searchData:SearchData = new SearchData('','');
-  resultData:ResultData[] = []; 
+  resultData:CaseResultData[] = []; 
   search(){
     this.loading=true;
     this.isResult = true;
     this.searchData.ResourceClass=this.selectedValue.value;
-    this.http.search(this.searchData).subscribe((data:ResultData[])=>{
+    this.http.search(this.searchData).subscribe((data:CaseResultData[])=>{
       this.resultData = data;
     })
     setTimeout(()=>{//换数据
       this.data=this.resultData;
       this.loading = false;
-    },200)
+    },500)
   }
 
  a(){
@@ -88,8 +88,8 @@ export class Search2Component implements OnInit {
   ];
 
   isResult:boolean = true;
-  contentData:ResultData = new ResultData(null,'','',['']);
-  get(item:ResultData){
+  contentData:CaseResultData = new CaseResultData(null,'','',[''],'','','','','','');
+  get(item:CaseResultData){
     //进入content界面（详细信息和相关）
     this.contentData = item
     this.isResult=false;

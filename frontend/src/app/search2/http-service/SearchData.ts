@@ -7,12 +7,19 @@ export class SearchData {
 }
 
 //点击搜索按钮后得到的结果数据（数组），也用作"点击具体选项"的传递数据（单个）
-export class ResultData{
+export class CaseResultData{
     constructor(    
         public ID:Number,
         public ResourceClass:string,
         public Name:string,
         public Label:string[], 
+
+        public OperateName:string, //例如故障
+        public Operatetime:string, //事件操作时间
+        public Operator:string, //操作者
+        public OperatePosition:string, //操作地点
+        public CaseDetail:string, //操作详情
+        public RName:string, //操作资源对象
     ){}
 }
 
