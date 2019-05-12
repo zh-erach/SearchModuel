@@ -1,7 +1,9 @@
 <div class="holdBox">
+    
   <button (click)="a()">a</button>
   <div class="searchBox">
-    <div class="chooseBox">
+    
+    <div class="buttonBox">
      <nz-select 
      style="width: 120px;" 
      [compareWith]="compareFn" 
@@ -41,6 +43,7 @@
   
   </div>
   <div *ngIf="!isResult" class="result">
+    <button nz-button nzType="dashed" (click)="onBack()"><i nz-icon type="left"></i></button>
     <app-content [input]="contentData"></app-content>
   </div>
   

@@ -1,9 +1,9 @@
-<div id="Case">
+<div id="Case" *ngIf="input.ResourceClass=='事件'">
     <div class="detail">
         <p>名称:{{input.Name}}</p>
-        <p>事件类别:{{input.OprateName}}</p>
-        <p>发生时间:{{input.OperateTime}}</p>
-        <p>发生地点:{{input.OperatePersition}}</p>
+        <p>事件类别:{{input.OeprateName}}</p>
+        <p>发生时间:{{input.Operatetime}}</p>
+        <p>发生地点:{{input.OperatePosition}}</p>
         <p>涉及资源:{{input.RName}}</p>
         <p>操作者:{{input.Operator}}</p>
     </div>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="RelatedResources">
-
+            
         </div>
 
         <div class="RelatedPeople">
@@ -25,7 +25,9 @@
 
 <div id="People" *ngIf="input.ResourceClass=='人员'">
     <div class="detail">
-        <p>名称:</p>
+        <p>名称:{{input.Name}}</p>
+        <p>所在组:{{input.Group}}</p>
+        <p>角色:{{input.Role}}</p>
     </div>
     <div class="related">
         <div class="RelatedResources">

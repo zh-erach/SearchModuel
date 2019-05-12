@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchData, CaseResultData } from '../search2/http-service/SearchData';
+import { SearchData, CaseResultData,UserResultData } from '../search2/http-service/SearchData';
 import { HttpServiceService } from './http-service/http-service.service';
 import { SearchComponent } from '../search/search.component';
 
@@ -34,18 +34,32 @@ export class Search2Component implements OnInit {
 
   //获取用户输入的数据
   searchData:SearchData = new SearchData('','');
-  resultData:CaseResultData[] = []; 
+  caseResultData:CaseResultData[] = []; 
+  userResultData:UserResultData[] = [];
   search(){
     this.loading=true;
     this.isResult = true;
     this.searchData.ResourceClass=this.selectedValue.value;
-    this.http.search(this.searchData).subscribe((data:CaseResultData[])=>{
-      this.resultData = data;
-    })
-    setTimeout(()=>{//换数据
-      this.data=this.resultData;
+    if(this.selectedValue.value=='事件'){
+      this.http.searchCase(this.searchData).subscribe((data:CaseResultData[])=>{
+      this.caseResultData = data;
+      })  
+      setTimeout(()=>{//换数据
+      this.data=this.caseResultData;
       this.loading = false;
     },500)
+    }
+    if(this.selectedValue.value=='人员'){
+      this.http.searchPeople(this.searchData).subscribe((data:UserResultData[])=>{
+        this.userResultData = data;
+      })
+      setTimeout(()=>{//换数据
+        this.data=this.userResultData;
+        this.loading = false;
+      },500)
+    }
+    
+  
   }
 
  a(){
@@ -59,31 +73,38 @@ export class Search2Component implements OnInit {
   data = [
     {
       Name: '阿道夫',
-      Label:['服务器',''],
+      //Label:['服务器',''],
+      ResourceClass:'事件',
     },
     {
       Name: '小王',
-      Label:['人员','']
+      //Label:['人员',''],
+      ResourceClass:'服务器',
     },
     {
       Name: '主机短路',
-      Label:['故障','感染']
+      //Label:['故障','感染'],
+      ResourceClass:'IP/域名',
     },
     {
       Name: 'Ant Design Title 4',
-      Label:['a','']
+      //Label:['a',''],
+      ResourceClass:'存储',
     },
     {
       Name: 'Ant Design Title 5',
-      Label:['a']
+      //Label:['a'],
+      ResourceClass:'业务系统',
     },
     {
       Name: 'Ant Design Title 6',
-      Label:['a']
+      //Label:['a'],
+      ResourceClass:'事件',
     },
     {
       Name: 'Ant Design Title 7',
-      Label:['a','k','o']
+      //Label:['a','k','o'],
+      ResourceClass:'事件',
     },
   ];
 
@@ -93,5 +114,9 @@ export class Search2Component implements OnInit {
     //进入content界面（详细信息和相关）
     this.contentData = item
     this.isResult=false;
+  }
+
+  onBack(){
+    this.isResult = true;
   }
 }
