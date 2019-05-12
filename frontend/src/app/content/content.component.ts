@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResultData } from '../search2/http-service/SearchData'
+import { CaseResultData } from '../search2/http-service/SearchData'
 import { HttpServiceService } from '../search2/http-service/http-service.service';
 
 
@@ -10,7 +10,7 @@ import { HttpServiceService } from '../search2/http-service/http-service.service
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
-  @Input() input:ResultData
+  @Input() input:CaseResultData
 
   constructor(
     private  http:HttpServiceService
@@ -19,8 +19,11 @@ export class ContentComponent {
   ngOnInit(): void {
    //在初始化视图的时候，传回要查看选项的信息，得到详细信息和相关资源用于完成初始化视图
     this.http.searchContent(this.input).subscribe((data:any)=>{
-
+      
     })
+
+    
+
   }
 
 
@@ -41,5 +44,5 @@ export class ContentComponent {
 
 
 
-  
+
 }

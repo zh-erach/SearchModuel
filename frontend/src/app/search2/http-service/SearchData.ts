@@ -1,24 +1,32 @@
 //点解搜索按钮后传的数据
 export class SearchData {
     constructor(
-        public ResourceClass:string ,
+        public ResourceClass:string,
         public KeyWord:string
     ){}
 }
 
-//点击搜索按钮后得到的结果数据（数组），也用作点击具体选项的传递数据（单个）
-export class ResultData{
+//点击搜索按钮后得到的结果数据（数组），也用作"点击具体选项"的传递数据（单个）
+export class CaseResultData{
     constructor(    
         public ID:Number,
         public ResourceClass:string,
         public Name:string,
-        public Label:string 
+        public Label:string[], 
+
+        public OperateName:string, //例如故障
+        public Operatetime:string, //事件操作时间
+        public Operator:string, //操作者
+        public OperatePosition:string, //操作地点
+        public CaseDetail:string, //操作详情
+        public RName:string, //操作资源对象
     ){}
 }
 
 //接收的详细信息和相关资源
 export class Detail{
     constructor(
-
+        public mark:string,
+        
     ){}
 }

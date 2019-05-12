@@ -1,16 +1,149 @@
-<div class="detail">
-    <p>名称:{{input.Name}}</p>
-    <p>标签:{{input.Label}}</p>
+<div id="Case">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>事件类别:{{input.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+        <p>涉及资源:{{input.RName}}</p>
+        <p>操作者:{{input.Operator}}</p>
+    </div>
+
+    <div class="related">
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+
+        <div class="RelatedResources">
+
+        </div>
+
+        <div class="RelatedPeople">
+
+        </div>
+    </div>
 </div>
 
-<div class="RelatedResources">
+<div id="People" *ngIf="input.ResourceClass=='人员'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+    </div>
+    <div class="related">
+        <div class="RelatedResources">
+            <p>相关资源:{{input.RName}}</p>
+        </div>
+        <div class="RelatedCase">
+            <p>相关事件:{{input.Operator}}</p>
+        </div>
+    </div>
+</div>
+
+<div id="People" *ngIf="input.ResourceClass=='资源'"><!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按资源类型存储到数据库-->
+
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p></p>
+    </div>
+
+    <div class="related">
+
+        <div class="RelatedResources">
+            <p>相关资源:{{input.RName}}</p>
+        </div>
+
+        <div class="RelatedCase">
+            <p>相关事件:{{input.Operator}}</p>
+        </div>
+
+    </div>
 
 </div>
 
-<div class="RelatedCase">
 
+<!--
+<div id="Resource" *ngIf="input.ResourceClass=='服务器'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
+        <p>事件类别:{{iput.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+    </div>
+
+    <div class="related">
+        <div class="RelatedResources">
+            <p>涉及资源:{{input.RName}}</p>
+        </div>
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
 </div>
 
-<div class="RelatedPeople">
+<div id="" *ngIf="input.ResourceClass=='IP/域名'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
+        <p>事件类别:{{iput.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+    </div>
 
+    <div class="related">
+        <div class="RelatedResources">
+            <p>涉及资源:{{input.RName}}</p>
+        </div>
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
 </div>
+
+<div id="" *ngIf="input.ResourceClass=='存储'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
+        <p>事件类别:{{iput.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+    </div>
+
+    <div class="related">
+        <div class="RelatedResources">
+            <p>涉及资源:{{input.RName}}</p>
+        </div>
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
+</div>
+
+<div id="" *ngIf="input.ResourceClass=='业务系统'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
+        <p>事件类别:{{iput.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+    </div>
+
+    <div class="related">
+        <div class="RelatedResources">
+            <p>涉及资源:{{input.RName}}</p>
+        </div>
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
+</div>-->
