@@ -83,12 +83,12 @@ export class Search2Component implements OnInit {
     },
     {
       Name: 'Ant Design Title 7',
-      Label:['a']
+      Label:['a','k','o']
     },
   ];
 
   isResult:boolean = true;
-  contentData:CaseResultData = new CaseResultData(null,'','',[''],'','','','','','');
+  contentData:CaseResultData = new CaseResultData(null,'1','2',['3'],'4','5','6','7','8','9');
   get(item:CaseResultData){
     //进入content界面（详细信息和相关）
     this.contentData = item

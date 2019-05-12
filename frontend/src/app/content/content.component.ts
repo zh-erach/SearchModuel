@@ -21,6 +21,9 @@ export class ContentComponent {
     this.http.searchContent(this.input).subscribe((data:any)=>{
       
     })
+
+    
+
   }
 
 

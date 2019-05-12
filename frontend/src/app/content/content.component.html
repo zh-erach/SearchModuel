@@ -1,18 +1,61 @@
-<div class="detail">
-    <p>名称:{{input.Name}}</p>
-    <p>标签:{{input.Label}}</p>
+<div id="Case" *ngIf="input.ResourceClass=='事件'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
+        <p>事件类别:{{iput.OprateName}}</p>
+        <p>发生时间:{{input.OperateTime}}</p>
+        <p>发生地点:{{input.OperatePersition}}</p>
+    </div>
+
+    <div class="related">
+        <div class="RelatedResources">
+            <p>涉及资源:{{input.RName}}</p>
+        </div>
+
+        <div class="RelatedCase">
+            <p>事件描述:{{input.CaseDetail}}</p>
+        </div>
+
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
 </div>
 
-<div class="related">
-    <div class="RelatedResources">
-        啊
+<div id="People" *ngIf="input.ResourceClass=='人员'">
+    <div class="detail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
     </div>
 
-    <div class="RelatedCase">
-        吖
+    <div class="related">
+        <div class="RelatedResources">
+            <p>相关资源:{{input.RName}}</p>
+        </div>
+
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
+    </div>
+</div>
+
+<div id="Resource" *ngIf="input.ResourceClass=='资源'">
+    <div class="tail">
+        <p>名称:{{input.Name}}</p>
+        <p>标签:{{input.Label}}</p>
     </div>
 
-    <div class="RelatedPeople">
-        阿
+    <div class="related"> 
+        <div class="RelatedCase">
+            <p>详细配置:{{input.CaseDetail}}</p>
+        </div>
+
+        <div class="RelatedResources">
+            <p>相关资源:{{input.RName}}</p>
+        </div>
+
+        <div class="RelatedPeople">
+            <p>相关人员者:{{input.Operator}}</p>
+        </div>
     </div>
 </div>
