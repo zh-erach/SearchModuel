@@ -57,7 +57,12 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "存储")
 	case "事件":
 		fmt.Println("开始搜索事件")
-		vs := psql.SearchGetConciseCaseData("10001", data["KeyWord"].(string))
+		vs := psql.SearchGetCaseData("10001", data["KeyWord"].(string))
+		d, err := json.Marshal(vs)
+		checkError(err)
+		w.Write(d)
+	case "人员":
+		vs := psql.SearchGetUserData("10001", data["KeyWord"].(string))
 		d, err := json.Marshal(vs)
 		checkError(err)
 		w.Write(d)
