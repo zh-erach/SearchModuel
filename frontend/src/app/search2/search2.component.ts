@@ -59,7 +59,6 @@ export class Search2Component implements OnInit {
           this.loading = false;
         }, 500)
       } else {
-         
           this.http.searchResource(this.searchData).subscribe((data: ResourceResultData[]) => {
             this.resourceResultData = data;
           })
@@ -67,7 +66,6 @@ export class Search2Component implements OnInit {
             this.data = this.resourceResultData;
             this.loading = false;
           }, 500)
-        
       }
     }
   }
