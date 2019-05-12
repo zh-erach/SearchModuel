@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchData, ResultData } from '../search2/http-service/SearchData';
 import { HttpServiceService } from './http-service/http-service.service';
 import { SearchComponent } from '../search/search.component';
-import { Route } from '@angular/compiler/src/core';
-import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -46,7 +45,7 @@ export class Search2Component implements OnInit {
     setTimeout(()=>{//换数据
       this.data=this.resultData;
       this.loading = false;
-    },30)
+    },200)
   }
 
  a(){
@@ -60,36 +59,36 @@ export class Search2Component implements OnInit {
   data = [
     {
       Name: '阿道夫',
-      Label:'服务器'
+      Label:['服务器',''],
     },
     {
       Name: '小王',
-      Label:'人员'
+      Label:['人员','']
     },
     {
       Name: '主机短路',
-      Label:'故障'
+      Label:['故障','感染']
     },
     {
       Name: 'Ant Design Title 4',
-      Label:'a'
+      Label:['a','']
     },
     {
       Name: 'Ant Design Title 5',
-      Label:'a'
+      Label:['a']
     },
     {
       Name: 'Ant Design Title 6',
-      Label:'a'
+      Label:['a']
     },
     {
       Name: 'Ant Design Title 7',
-      Label:'a'
+      Label:['a']
     },
   ];
 
   isResult:boolean = true;
-  contentData:ResultData = new ResultData(null,'','','');
+  contentData:ResultData = new ResultData(null,'','',['']);
   get(item:ResultData){
     //进入content界面（详细信息和相关）
     this.contentData = item
