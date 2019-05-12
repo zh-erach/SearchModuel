@@ -38,8 +38,8 @@ export class HttpServiceService {
   searchResource(searchContent: SearchData){
     return this.http.post<ResourceResultData[]>(this.searchUrl, JSON.stringify(searchContent))
   }
-
-  data: any = [ {
+data:any=[]
+  /*data: any = [ {
     Name: '阿道夫',
     Label: ['服务器', ''],
     ResourceClass: '事件'
@@ -72,5 +72,5 @@ export class HttpServiceService {
 
   get<CaseResultData>() {
     return this.data
-  }
+  }*/
 }

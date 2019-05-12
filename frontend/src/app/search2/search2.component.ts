@@ -70,10 +70,10 @@ export class Search2Component implements OnInit {
     }
   }
 
-   a() {
+  /* a() {
      this.isResult = true;
      this.data = this.http.get()
-   }
+   }*/
 
 
   //搜索的结果数据
