@@ -21,8 +21,19 @@ type CaseResultData struct {
 }
 
 type UserResultData struct {
-	UserName      string
+	Name          string
 	ResourceClass string
-	Group         []string
-	Role          []string
+	Group         []string //所在组
+	Role          []string //角色
+}
+
+type ResourceResultData struct {
+	ID            int
+	Name          string //资源名称
+	RUser         string //使用者
+	RAdmin        string //管理员
+	ResourceClass string //资源类别
+	RLocation     string //附件位置（路径）
+	RConfigure    string //资源配置（路径、大）
+	RUse          string //资源用途（大）
 }

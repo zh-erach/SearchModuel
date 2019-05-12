@@ -48,13 +48,25 @@ func searchPage1(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("开始搜索")
 	switch data["ResourceClass"] {
 	case "服务器":
-		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "服务器")
+		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "服务器")
+		d, err := json.Marshal(vs)
+		checkError(err)
+		w.Write(d)
 	case "IP/域名":
-		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "IP/域名")
+		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "IP/域名")
+		d, err := json.Marshal(vs)
+		checkError(err)
+		w.Write(d)
 	case "业务系统":
-		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "业务系统")
+		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "业务系统")
+		d, err := json.Marshal(vs)
+		checkError(err)
+		w.Write(d)
 	case "存储":
-		psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "存储")
+		vs := psql.SearchGetConciseResourceData("10001", data["KeyWord"].(string), "存储")
+		d, err := json.Marshal(vs)
+		checkError(err)
+		w.Write(d)
 	case "事件":
 		fmt.Println("开始搜索事件")
 		vs := psql.SearchGetCaseData("10001", data["KeyWord"].(string))

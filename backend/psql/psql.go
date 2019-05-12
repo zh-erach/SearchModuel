@@ -43,8 +43,27 @@ func Close() {
 	db.Close()
 }
 
-func SearchGetConciseResourceData(userName string, keyWord string, searchClass string) {
-	fmt.Println(keyWord)
+func SearchGetConciseResourceData(userName string, keyWord string, searchClass string) (vs []tstruct.ResourceResultData) {
+	k := "%" + keyWord + "%"
+	sq := `select * from 
+			(select r_id,r_name,r_user,r_administrator,r_category,r_location,r_configure,r_use from
+	    		(select f_gid,t2.* from
+		    		(select f_gid,f_uname from t_user_group) t1,
+		    		(select * from t_resources) t2
+	    		where t1.f_uname=t2.r_creator)t3,
+	    		(select f_gid from t_user_group where f_uname=$1) t4
+    		where t4.f_gid=t3.f_gid and t3.r_category =$2) t6
+		where t6.r_name like $3;`
+	row, err := db.Query(sq, userName, searchClass, k)
+	if err != nil {
+		panic(err)
+	}
+	for row.Next() {
+		var v tstruct.ResourceResultData
+		row.Scan(&v.ID, &v.Name, &v.RUser, &v.RAdmin, &v.ResourceClass, &v.RLocation, &v.RConfigure, &v.RUse)
+		vs = append(vs, v)
+	}
+	return
 }
 
 func SearchGetCaseData(userName string, keyWord string) (vs []tstruct.CaseResultData) {
@@ -88,7 +107,7 @@ func SearchGetUserData(userName string, keyWord string) (vs []tstruct.UserResult
 		} else {
 			v.Group = append(v.Group, gn)
 			v.ResourceClass = "人员"
-			v.UserName = un
+			v.Name = un
 			vss[un] = v
 		}
 	}
@@ -109,7 +128,7 @@ func SearchGetUserData(userName string, keyWord string) (vs []tstruct.UserResult
 		} else {
 			v.Role = append(v.Role, rn)
 			v.ResourceClass = "人员"
-			v.UserName = un
+			v.Name = un
 			vss[un] = v
 		}
 	}
