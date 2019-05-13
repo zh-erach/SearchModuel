@@ -29,6 +29,7 @@ import { NzInputModule } from 'ng-zorro-antd';
 import { NzButtonModule } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd';
 import { NzListModule } from 'ng-zorro-antd';
+import { NzTableModule } from 'ng-zorro-antd';
 import { NzPageHeaderModule } from 'ng-zorro-antd';
 import { HttpServiceService } from './search2/http-service/http-service.service';
 import { ContentComponent } from './content/content.component';
@@ -36,7 +37,7 @@ import { ContentComponent } from './content/content.component';
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     SearchComponent,
     SearchBoxComponent,
     Search2Component,
@@ -50,8 +51,8 @@ import { ContentComponent } from './content/content.component';
     FormsModule,
 
     HttpClientModule,
-//导入 ng-zorro-antd 模块
-  //  NgZorroAntdModule,
+    //导入 ng-zorro-antd 模块
+    //  NgZorroAntdModule,
 
     NzSelectModule,
     NzInputModule,
@@ -59,8 +60,9 @@ import { ContentComponent } from './content/content.component';
     NzIconModule,
     NzListModule,
     NzPageHeaderModule,
+    NzTableModule
   ],
-  providers: [{provide: NZ_I18N, useValue: zh_CN},HttpServiceService],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, HttpServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

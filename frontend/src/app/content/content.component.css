@@ -1,3 +1,6 @@
+.a{
+    border:1px solid black
+}
 .detail{
     /*border: 1px solid black;*/
     margin: 0 5% 0 5%;
@@ -9,21 +12,43 @@
 
 .related{
     /*border: 1px solid black;*/
-    margin: 10px 0;
+    /* margin: 10px 0; */
     word-wrap:break-word;
+    margin-top:20px;
 }
 
-.RelatedResources{
-    /*border: 1px solid black;*/
-    margin:10px 20px 20px 20px;
-}
 
 .RelatedCase{
     /*border:1px solid black;*/
-    margin:20px;
+
+    line-height: 23px;
+    text-indent : 20px; 
 }
 
 .RelatedPeople{
-   /* border:1px solid black;*/
+    border:1px solid black;
     margin:20px;
+}
+
+.table{ 
+    width:100%;
+    border:1px solid #cad9ea; 
+    color:#666; 
+} 
+.table th { 
+    background-repeat:repeat-x; 
+    height:30px; 
+} 
+.table td,.table th{ 
+    border:1px solid #cad9ea; 
+    padding:0.5em; 
+} 
+.table tr.alter{ 
+    background-color:#f5fafe; 
+} 
+
+.header{
+    border:0.5px solid #cad9ea; 
+    border-bottom-width: 0px;
+    padding:0.5em;
 }

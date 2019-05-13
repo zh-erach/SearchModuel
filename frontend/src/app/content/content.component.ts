@@ -10,25 +10,19 @@ import { HttpServiceService } from '../search2/http-service/http-service.service
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
-  @Input() input:CaseResultData
+  @Input() input: any
 
   constructor(
-  ){}
+  ) { }
 
   ngOnInit(): void {
-  alert(this.input.ResourceClass)
-    if(this.input.ResourceClass !="事件"){
-      if(this.input.ResourceClass !="人员"){
-        if(this.input !=null){
-          this.input.ResourceClass="资源"
+    if (this.input.ResourceClass != "事件") {
+      if (this.input.ResourceClass != "人员") {
+        if (this.input != null) {
+          this.input.ResourceClass = "资源"
         }
       }
     }
-   
-  
-
-    
-
   }
 
 

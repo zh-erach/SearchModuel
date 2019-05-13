@@ -59,13 +59,13 @@ export class Search2Component implements OnInit {
           this.loading = false;
         }, 500)
       } else {
-          this.http.searchResource(this.searchData).subscribe((data: ResourceResultData[]) => {
-            this.resourceResultData = data;
-          })
-          setTimeout(() => {//换数据
-            this.data = this.resourceResultData;
-            this.loading = false;
-          }, 500)
+        this.http.searchResource(this.searchData).subscribe((data: ResourceResultData[]) => {
+          this.resourceResultData = data;
+        })
+        setTimeout(() => {//换数据
+          this.data = this.resourceResultData;
+          this.loading = false;
+        }, 500)
       }
     }
   }
@@ -79,21 +79,21 @@ export class Search2Component implements OnInit {
   //搜索的结果数据
   loading = false;  //是否进行加载动画
   data = []
-    
+
 
   isResult: boolean = true;
-  /*contentData: CaseResultData = new CaseResultData(null, '1', '2', ['3'], '4', '5', '6', '7', '8', '9');
+  contentData: CaseResultData = new CaseResultData(null, '1', '2', ['3'], '4', '5', '6', '7', '8', '9');
   get(item: CaseResultData) {
     //进入content界面
     this.contentData = item
     this.isResult = false;
-  }*/
-  contentData: any 
+  }
+  /*contentData: any 
   get(item: any) {
     //进入content界面
     this.contentData = item
     this.isResult = false;
-  }
+  }*/
 
   onBack() {
     this.isResult = true;

@@ -11,11 +11,11 @@ import (
 var db *sql.DB
 
 const (
-	host     = "123.207.121.2"
+	host     = "ifeel.vip"
 	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbname   = "test"
+	user     = "testdb"
+	password = "testdb"
+	dbname   = "testdb"
 )
 
 func init() {
@@ -43,11 +43,13 @@ func Close() {
 	db.Close()
 }
 
+// 查询资源的详细信息
 func SearchGetResourceData(userName string, keyWord string, searchClass string, isAdmin bool) (vs []tstruct.ResourceResultData) {
 	k := "%" + keyWord + "%"
 	var sq string
 	var row *sql.Rows
 	var err error
+	// 判断是不是管理组
 	if isAdmin {
 		sq = `select r_id,r_name,r_user,r_administrator,r_category,r_location,r_configure,r_use from t_resources 
 		where r_category=$1 and r_name like $2;`
@@ -78,12 +80,15 @@ func SearchGetResourceData(userName string, keyWord string, searchClass string, 
 	return
 }
 
+// 查询事件的详细信息
+// !!!!注意：事件这里没有发事件的id到前端，原因是因为有人修该物理模型时不是使用最新版的，后期得进行修改
 func SearchGetCaseData(userName string, keyWord string, isAdmin bool) (vs []tstruct.CaseResultData) {
 	k := "%" + keyWord + "%"
 	var row *sql.Rows
 	var err error
+	// 判断是不是管理组
 	if isAdmin {
-		sq := `select distinct id,c_operate_name,c_operator,c_operate_time,c_operate_position,c_case_detail,r_name 
+		sq := `select distinct c_operate_name,c_operator,c_operate_time,c_operate_position,c_case_detail,r_name 
 				from v_user_case
 				where c_operate_name like $1`
 		row, err = db.Query(sq, k)
@@ -92,7 +97,7 @@ func SearchGetCaseData(userName string, keyWord string, isAdmin bool) (vs []tstr
 		}
 	} else {
 		sq := `select distinct * from 
-				(select id,c_operate_name,c_operator,c_operate_time,c_operate_position,c_case_detail,r_name from v_user_case where f_uname = $1) t1 
+				(select c_operate_name,c_operator,c_operate_time,c_operate_position,c_case_detail,r_name from v_user_case where f_uname = $1) t1 
 			where t1.c_operate_name like $2`
 		row, err = db.Query(sq, userName, k)
 		if err != nil {
@@ -101,7 +106,7 @@ func SearchGetCaseData(userName string, keyWord string, isAdmin bool) (vs []tstr
 	}
 	for row.Next() {
 		var v tstruct.CaseResultData
-		row.Scan(&v.ID, &v.OperateName, &v.Operator, &v.Operatetime, &v.OperatePosition, &v.CaseDetail, &v.RName)
+		row.Scan(&v.OperateName, &v.Operator, &v.Operatetime, &v.OperatePosition, &v.CaseDetail, &v.RName)
 		ro := fmt.Sprintf("%s(%s)", v.Operator, v.OperateName)
 		v.Name = ro
 		v.ResourceClass = "事件"
@@ -111,10 +116,13 @@ func SearchGetCaseData(userName string, keyWord string, isAdmin bool) (vs []tstr
 	return
 }
 
+// 查询人员的详细信息
 func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstruct.UserResultData) {
 	k := "%" + keyWord + "%"
 	var row *sql.Rows
 	var err error
+	/***********查询人员所在组数据***********/
+	// 判断是不是管理组
 	if isAdmin {
 		sq := "select * from v_user_group where user_name like $1;"
 		row, err = db.Query(sq, k)
@@ -122,7 +130,7 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 			panic(err)
 		}
 	} else {
-		sq := `select distinct t2.* from 
+		sq := `select distinct t2.user_name,t2.gname from 
 					(select gname from v_user_group where user_name=$1) t1,
 					(select * from v_user_group)t2 
 				where t1.gname=t2.gname and t2.user_name like $2`
@@ -131,6 +139,7 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 			panic(err)
 		}
 	}
+	// 用一个map接收数据库查询到的数据，key是user_name
 	vss := make(map[string]tstruct.UserResultData)
 	for row.Next() {
 		var v tstruct.UserResultData
@@ -148,7 +157,7 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 			vss[un] = v
 		}
 	}
-
+	/***********查询人员所拥有角色数据***********/
 	if isAdmin {
 		sq2 := "select user_name,rname from v_user_role where user_name like $1;"
 		row, err = db.Query(sq2, k)
@@ -187,6 +196,7 @@ func SearchGetUserData(userName string, keyWord string, isAdmin bool) (vs []tstr
 	return
 }
 
+// 查询人员是不是管理组
 func IsAdmin(userName string) bool {
 	sq := "select * from v_user_group where gname='管理员' and user_name=$1;"
 	row, err := db.Query(sq, userName)
