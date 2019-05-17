@@ -1,11 +1,45 @@
-
+/*整体*/
 .holdBox{
     width: 100%-2px;
-   /* border:1px solid black;*/
-   margin:0 20px;
-   background-color: azure;
-   box-shadow: 2px 2px 20px  azure
+    background-color: #F3F5FA;
+    /*border:1px solid black;*/
 }
+
+/*内容*/
+.content{
+    margin:0 10%;
+    background-color: white;
+    /*border:1px solid black;*/
+}
+
+/*查询条件框*/
+.condition{
+    background-color: white;
+   /* border:1px solid black;*/
+    padding: 5px;
+    margin:5px
+}
+
+/*标签*/
+.TagBox{
+    float: left;
+    background-color: white;
+    border:3px white;
+    margin: 2px;
+    border-radius: 5px;
+}
+.Tag{
+    float:left;
+    font: 28px;
+    border-radius: 5px 5px 0 0px;
+    padding:5px 10px;
+    margin: 7px 0px 0 3px;
+    cursor: pointer;
+}
+.Tag:hover{
+    background-color: white;
+}
+
 
 .searchBox{
     position: relative;
@@ -18,30 +52,73 @@
     transform: translate(-50%);
 }
 
-.buttonBox{
-    float: left;;
-}
-
-.inputBox{
-    width: 400px;
-    float: left;
-}
-.result{
-    /*border: 1px solid black;*/
-    margin: 10px 20% ;
-    padding:5px 10px;
-}
-
-.content{
-    /*border: 1px solid black;*/
-    margin: 10px 10px ;
-    padding:5px 10px;
-}
-
-
-.list{
-    padding:5px;
-}.list:hover{
-    background-color: rgb(74, 225, 252);
+.configure{
+    text-indent: 5px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    background-color:white;
     border-radius: 5px;
 }
+
+
+div.output{
+    /* 设置圆角 */
+    border-radius: 7px;
+   /* 内间隔 */
+   padding: 10px;
+   /* y轴的滚动条 */
+   overflow-y:scroll;
+   /* x轴的滚动条隐藏 */
+   overflow-x: hidden;
+   height:300px;
+   width: auto;
+   background-color:whitesmoke;
+}
+/* 滚动条start */
+.output::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+ }
+ .output::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.05);
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1); */
+ }
+ /*鼠标悬浮在该类指向的控件上时滑块的样式*/
+ .output:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1); */
+ }
+ /*鼠标悬浮在滑块上时滑块的样式*/
+ .output::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,.4);
+    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1); */
+ }
+ /* 滚动条end */
+
+
+
+.result{
+    /*border: 1px solid black;*/
+    margin: 10px 5px ;
+    padding:5px 10px;
+    border:1px solid black;
+}
+
+.relatedResources{
+    /*border:1px solid black;*/
+    margin: 5px 5px 0px 5px;
+}
+.relatedCase{
+    /*border:1px solid black;*/
+    margin: 5px 5px 0px 5px;
+}
+.relatedPeople{
+    
+    /*border:1px solid black;*/
+    margin: 5px 5px 0px 5px;
+}
+
+
+

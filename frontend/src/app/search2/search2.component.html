@@ -1,52 +1,338 @@
 <div class="holdBox">
-    
-  <!--<button (click)="a()">a</button>-->
-  <div class="searchBox">
-    
-    <div class="buttonBox">
-     <nz-select 
-     style="width: 120px;" 
-     [compareWith]="compareFn" 
-     [(ngModel)]="selectedValue" 
-     nzAllowClear 
-     nzPlaceHolder="Choose"
-     ><!--(ngModelChange)="getChoice($event)"-->
-      <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
-    </nz-select>
-  </div>
-    <div class="inputBox">
-      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" >
-       <input type="text" nz-input placeholder="input search text" [(ngModel)]="searchData.KeyWord"/>
-      </nz-input-group>
-      <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon type="search"></i></button>
-      </ng-template>
+    <div class="content">
+      <div class="condition">
+        <div class="TagBox">
+          <div class="Tag" [@selected]="isServer?'open':'close'" (click)="ClickTagServer()">服务器</div>
+          <div class="Tag" [@selected]="isIp?'open':'close'" (click)="ClickTagIP()">IP/域名</div>
+          <div class="Tag" [@selected]="isPersion?'open':'close'" (click)="ClickTagPersion()" *ngIf='isAdmin'>人员</div>
+          <div class="Tag" [@selected]="isBusinessSystem?'open':'close'" (click)="ClickTagBS()" *ngIf='isAdmin'>业务系统</div>
+          <div class="Tag" [@selected]="isStorageEquipment?'open':'close'" (click)="ClickTagSE()">存储设备</div>
+          <div class="Tag" [@selected]="isEvent?'open':'close'" (click)="ClickTagEvent()" *ngIf='isAdmin'>事件</div>
+        </div>
+        <nz-divider nzText="With Text"></nz-divider>
+  
+        <!--资源索引条件-->
+        <div class="class" *ngIf="!isPersion&&!isEvent">
+          选择分类{{ResourcesClass}}:
+          <nz-cascader nzChangeOnSelect [nzOptions]="nzOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)">
+          </nz-cascader>
+        </div>
+  
+        <!--事件索引条件-->
+        <div *ngIf="isEvent">
+          {{selectedValue.value}}
+          <nz-select style="width: 120px;" [compareWith]="compareFn" [(ngModel)]="selectedValue" nzAllowClear
+            nzPlaceHolder="Choose">
+            <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
+          </nz-select>
+        </div>
+  
+        <!--人员索引条件-->
+        <div *ngIf="isPersion">
+  
+        </div>
+      </div>
+  
+      <!--搜索框-->
+      <div class="searchBox" *ngIf="!isEvent">
+        <div class="inputBox">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="input search text" [(ngModel)]="searchData.KeyWord" />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon type="search"></i></button>
+          </ng-template>
+        </div>
+      </div>
+  
+      <div class="result">
+  
+        <!--根据资源查询-->
+        <div *ngIf="false">
+          <div>
+            <!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="testData" [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>使用者</th>
+                  <th>管理员</th>
+                  <th>存放位置</th>
+                  <th>用途</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.RUser }}</td>
+                  <td>{{ data.RAdmin }}</td>
+                  <td>{{ data.RLocation}}</td>
+                  <td>{{ data.RUse }}</td>
+                  <td>
+                    <a (click)="LookOneLine(data)">只看此项相关 </a> |
+                    <a (click)="showModal()"> 查看详细配置</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="详细配置:" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOK()"
+              [nzOkLoading]="isOkLoading">
+              <div class="configure">
+                <div [innerHTML]='content' class="output"></div>
+              </div>
+            </nz-modal>
+          </div>
+          
+          <!--相关资源-->
+          <div class="relatedResources">
+            <nz-table #borderedTable1 nzBordered nzFooter="Footer" nzTitle="相关资源" [nzData]="resourceResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>使用者</th>
+                  <th>管理员</th>
+                  <th>附件位置</th>
+                  <th>用途</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable1.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.RUser }}</td>
+                  <td>{{ data.RAdmin }}</td>
+                  <td>{{ data.RLocation }}</td>
+                  <td>{{ data.RUse }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+  
+          <!--相关事件-->
+          <div class="relatedCase">
+            <nz-table #borderedTable2 nzBordered nzFooter="Footer" nzTitle="相关事件" [nzData]="caseResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>标签</th>
+                  <th>操作类型</th>
+                  <th>操作时间</th>
+                  <th>操作者</th>
+                  <th>操作地点</th>
+                  <th>操作详情</th>
+                  <th>操作资源对象</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable2.data">
+                  <td title="{{ data.Name }}">{{ data.Name }}</td>
+                  <td title="{{ data.Label }}"> {{ data.Label }}</td>
+                  <td>{{data.OperateName}}</td>
+                  <td>{{data.Operatetime}}</td>
+                  <td>{{data.Operator}}</td>
+                  <td>{{data.OperatePosition}}</td>
+                  <td>{{data.CaseDetail}}</td>
+                  <td>{{data.RName}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+  
+          <!--相关人员-->
+          <div class="relatedPeople">
+            <nz-table #borderedTable3 nzBordered nzFooter="Footer" nzTitle="相关人员" [nzData]="userResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>用户名</th>
+                  <th>用户组</th>
+                  <th>用户角色</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable3.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.Group }}</td>
+                  <td>{{ data.Role }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+  
+        <!--根据事件查询-->
+        <div *ngIf="true">
+          <div id="Case" >
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="casetestData" [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>操作名称</th>
+                  <th>资源名称</th>
+                  <th>操作者</th>
+                  <th>操作时间</th>
+                  <th>操作地点</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable.data">
+                  <td>{{ data.OperateName }}</td>
+                  <td>{{ data.RName }}</td>
+                  <td>{{ data.Operator }}</td>
+                  <td>{{ data.Operatetime}}</td>
+                  <td>{{ data.OperatePosition }}</td>
+                  <td>
+                    <a (click)="CaseLookOneLine(data)">只看此项相关 </a> |
+                    <a (click)="showModal(data)" > 查看详细配置</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="详细配置:" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOK()"
+              [nzOkLoading]="isOkLoading">
+              <div class="configure">
+                <div [innerHTML]='configureDetail' class="output"></div>
+              </div>
+            </nz-modal>
+          </div>
+  
+          <!--相关资源-->
+          <div class="relatedResources">
+            <nz-table #borderedTable1 nzBordered nzFooter="Footer" nzTitle="相关资源" [nzData]="resourceResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>使用者</th>
+                  <th>管理员</th>
+                  <th>附件位置</th>
+                  <th>用途</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable1.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.RUser }}</td>
+                  <td>{{ data.RAdmin }}</td>
+                  <td>{{ data.RLocation }}</td>
+                  <td>{{ data.RUse }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+  
+          <!--相关人员-->
+          <div class="relatedPeople">
+            <nz-table #borderedTable3 nzBordered nzFooter="Footer" nzTitle="相关人员" [nzData]="userResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>用户名</th>
+                  <th>用户组</th>
+                  <th>用户角色</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable3.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.Group }}</td>
+                  <td>{{ data.Role }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+  
+        <!--根据人员查询-->
+        <div *ngIf="false">
+          <div id="People" *ngIf="input.ResourceClass=='人员'">
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="testData" [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>用户名称</th>
+                  <th>用户所在组</th>
+                  <th>用户角色</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.RGroup }}</td>
+                  <td>{{ data.Role }}</td>
+                  <td>
+                    <a (click)="LookOneLine(data)">只看此项相关 </a> |
+                    <a (click)="showModal()"> 查看详细配置</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="详细配置:" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOK()"
+              [nzOkLoading]="isOkLoading">
+              <div class="configure">
+                <div [innerHTML]='content' class="output"></div>
+              </div>
+            </nz-modal>
+          </div>
+  
+          <!--相关资源-->
+          <div class="relatedResources">
+            <nz-table #borderedTable1 nzBordered nzFooter="Footer" nzTitle="相关资源" [nzData]="resourceResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>使用者</th>
+                  <th>管理员</th>
+                  <th>存放位置</th>
+                  <th>用途</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable1.data">
+                  <td>{{ data.Name }}</td>
+                  <td>{{ data.RUser }}</td>
+                  <td>{{ data.RAdmin }}</td>
+                  <td>{{ data.RLocation }}</td>
+                  <td>{{ data.RUse }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+  
+          <!--相关事件-->
+          <div class="relatedCase">
+            <nz-table #borderedTable2 nzBordered nzFooter="Footer" nzTitle="相关事件" [nzData]="caseResultData"
+              [nzPageSize]="5">
+              <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>标签</th>
+                  <th>操作类型</th>
+                  <th>操作时间</th>
+                  <th>操作者</th>
+                  <th>操作地点</th>
+                  <th>操作详情</th>
+                  <th>操作资源对象</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of borderedTable2.data">
+                  <td title="{{ data.Name }}">{{ data.Name }}</td>
+                  <td title="{{ data.Label }}"> {{ data.Label }}</td>
+                  <td>{{ data.OperateName}}</td>
+                  <td>{{data.Operatetime}}</td>
+                  <td>{{data.Operator}}</td>
+                  <td>{{data.OperatePosition}}</td>
+                  <td>{{data.CaseDetail}}</td>
+                  <td>{{data.RName}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+  
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="result" *ngIf="isResult">
-    
-    <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
-     <ng-template #item let-item>
-        <nz-list-item  class="list">
-          <nz-list-item-meta
-            [nzTitle]="nzTitle"
-            nzDescription="{{item.Label}}"
-          >
-            <ng-template #nzTitle>
-              <a (click)="get(item)">{{ item.Name }}</a>
-            </ng-template>
-          </nz-list-item-meta>  
-        </nz-list-item>
-      </ng-template>
-    </nz-list>
-  
-  </div>
-  <div *ngIf="!isResult" class="result">
-    <button nz-button nzType="dashed" (click)="onBack()"><i nz-icon type="left"></i></button>
-    <app-content [input]="contentData"></app-content>
-  </div>
-  
-
-</div>
-
