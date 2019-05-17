@@ -176,7 +176,7 @@ export class SearchComponent implements OnInit {
 
 
 //搜索功能
-  searchTag:string   //搜索的类型（事件、资源、人员）
+  searchTag:string='资源'   //搜索的类型（事件、资源、人员）
   searchData: SearchData = new SearchData('', '', '') //传回后端进行查询的值
   caseResultData: CaseResultData[] = [];
   userResultData: UserResultData[] = [];
@@ -256,6 +256,7 @@ export class SearchComponent implements OnInit {
     this.searchData.BResourceClass = '事件';
     this.searchData.KeyWord = data.RName;
     this.http.searchCase(this.searchData).subscribe((data: any) => {
+      this.searchTag='事件';
       this.searchResultData = <SearchResultData>data.objects;
       this.caseResultData = this.searchResultData.caseResult;
       this.userResultData = this.searchResultData.userResult;
@@ -266,6 +267,7 @@ export class SearchComponent implements OnInit {
       this.searchData.BResourceClass = '资源';
       this.searchData.KeyWord = data.Name;
       this.http.searchCase(this.searchData).subscribe((data: any) => {
+        this.searchTag='资源';
         this.searchResultData = <SearchResultData>data.objects;
         this.caseResultData = this.searchResultData.caseResult;
         this.userResultData = this.searchResultData.userResult;
@@ -276,6 +278,7 @@ export class SearchComponent implements OnInit {
     this.searchData.BResourceClass = '人员';
     this.searchData.KeyWord = data.Name;
     this.http.searchCase(this.searchData).subscribe((data: any) => {
+      this.searchTag='人员';
       this.searchResultData = <SearchResultData>data.objects;
       this.caseResultData = this.searchResultData.caseResult;
       this.userResultData = this.searchResultData.userResult;

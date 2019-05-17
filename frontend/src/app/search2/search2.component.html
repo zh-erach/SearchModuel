@@ -9,7 +9,7 @@
           <div class="Tag" [@selected]="isStorageEquipment?'open':'close'" (click)="ClickTagSE()">存储设备</div>
           <div class="Tag" [@selected]="isEvent?'open':'close'" (click)="ClickTagEvent()" *ngIf='isAdmin'>事件</div>
         </div>
-        <nz-divider nzText="With Text"></nz-divider>
+        <nz-divider nzText="" ></nz-divider>
   
         <!--资源索引条件-->
         <div class="class" *ngIf="!isPersion&&!isEvent">
@@ -25,6 +25,7 @@
             nzPlaceHolder="Choose">
             <nz-option *ngFor="let option of optionList" [nzValue]="option" [nzLabel]="option.label"></nz-option>
           </nz-select>
+          <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon type="search"></i></button>
         </div>
   
         <!--人员索引条件-->
@@ -36,7 +37,7 @@
       <!--搜索框-->
       <div class="searchBox" *ngIf="!isEvent">
         <div class="inputBox">
-          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+          <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" >
             <input type="text" nz-input placeholder="input search text" [(ngModel)]="searchData.KeyWord" />
           </nz-input-group>
           <ng-template #suffixIconButton>
@@ -44,14 +45,13 @@
           </ng-template>
         </div>
       </div>
-  
       <div class="result">
   
         <!--根据资源查询-->
-        <div *ngIf="false">
+        <div *ngIf="searchTag=='资源'">
           <div>
             <!--“服务器”、“IP/域名”、“业务系统”、“存储”类型都是按"资源"类型存储到数据库-->
-            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="testData" [nzPageSize]="5">
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="resourceResultData" [nzPageSize]="5">
               <thead>
                 <tr>
                   <th>名称</th>
@@ -70,7 +70,7 @@
                   <td>{{ data.RLocation}}</td>
                   <td>{{ data.RUse }}</td>
                   <td>
-                    <a (click)="LookOneLine(data)">只看此项相关 </a> |
+                    <a (click)="ResourceLookOneLine(data)">只看此项相关 </a> |
                     <a (click)="showModal()"> 查看详细配置</a>
                   </td>
                 </tr>
@@ -163,9 +163,9 @@
         </div>
   
         <!--根据事件查询-->
-        <div *ngIf="true">
+        <div *ngIf="searchTag=='事件'">
           <div id="Case" >
-            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="casetestData" [nzPageSize]="5">
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="caseResultData" [nzPageSize]="5">
               <thead>
                 <tr>
                   <th>操作名称</th>
@@ -203,23 +203,23 @@
             <nz-table #borderedTable1 nzBordered nzFooter="Footer" nzTitle="相关资源" [nzData]="resourceResultData"
               [nzPageSize]="5">
               <thead>
-                <tr>
-                  <th>名称</th>
-                  <th>使用者</th>
-                  <th>管理员</th>
-                  <th>附件位置</th>
-                  <th>用途</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of borderedTable1.data">
-                  <td>{{ data.Name }}</td>
-                  <td>{{ data.RUser }}</td>
-                  <td>{{ data.RAdmin }}</td>
-                  <td>{{ data.RLocation }}</td>
-                  <td>{{ data.RUse }}</td>
-                </tr>
-              </tbody>
+                  <tr>
+                    <th>名称</th>
+                    <th>使用者</th>
+                    <th>管理员</th>
+                    <th>存放位置</th>
+                    <th>用途</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of borderedTable1.data">
+                    <td>{{ data.Name }}</td>
+                    <td>{{ data.RUser }}</td>
+                    <td>{{ data.RAdmin }}</td>
+                    <td>{{ data.RLocation }}</td>
+                    <td>{{ data.RUse }}</td>
+                  </tr>
+                </tbody>
             </nz-table>
           </div>
   
@@ -246,9 +246,9 @@
         </div>
   
         <!--根据人员查询-->
-        <div *ngIf="false">
-          <div id="People" *ngIf="input.ResourceClass=='人员'">
-            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="testData" [nzPageSize]="5">
+        <div *ngIf="searchTag=='人员'">
+          <div id="People">
+            <nz-table #borderedTable nzBordered nzFooter="Footer" nzTitle="查询结果" [nzData]="userResultData" [nzPageSize]="5">
               <thead>
                 <tr>
                   <th>用户名称</th>
@@ -259,11 +259,10 @@
               <tbody>
                 <tr *ngFor="let data of borderedTable.data">
                   <td>{{ data.Name }}</td>
-                  <td>{{ data.RGroup }}</td>
+                  <td>{{ data.Group }}</td>
                   <td>{{ data.Role }}</td>
                   <td>
-                    <a (click)="LookOneLine(data)">只看此项相关 </a> |
-                    <a (click)="showModal()"> 查看详细配置</a>
+                    <a (click)="PeopleLookOneLine(data)">只看此项相关 </a> |
                   </td>
                 </tr>
               </tbody>
